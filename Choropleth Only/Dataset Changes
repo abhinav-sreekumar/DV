@@ -1,0 +1,6 @@
+// Children has STATE/UT instead of AREA_NAME
+
+// All datasets need to change the following state names:
+1. ANDAMAN & NICOBAR ISLANDS --> A & N ISLANDS
+2. DADRA & NAGRA HAVELI --> D & N HAVELI
+3. ARUNANCHAL PRADESH --> ARUNACHAL PRADESH
