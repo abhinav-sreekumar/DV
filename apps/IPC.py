@@ -85,7 +85,7 @@ layout = html.Div([
     [
         Output('ipc1', 'figure'),
         Output('ipc2', 'figure'),
-        Output('ipc3', 'figure')
+        Output('ipc3', 'figure'),
     ], 
     [
         Input('state', 'value'),
