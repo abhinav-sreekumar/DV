@@ -22,6 +22,10 @@ crimeOptions=[]
 for i in Crimes_Against_SC_ST.columns[2:]:
     crimeOptions.append({'label': i, 'value': i})
 
+years = []
+for i in Crimes_Against_SC_ST.YEAR.unique():
+    years.append({'label': i, 'value': i})
+
 caipc = Crimes_Against_SC_ST
 caipc.sort_values(by=['AREA_NAME', 'YEAR'], inplace=True)
 caipc.reset_index(drop=True, inplace=True)
@@ -57,18 +61,7 @@ layout = html.Div([
     html.Div([
         dcc.Dropdown(
             id='year',
-            options=[
-                {'label':'2001', 'value':'2001'},
-                {'label':'2002', 'value':'2002'},
-                {'label':'2003', 'value':'2003'},
-                {'label':'2004', 'value':'2004'},
-                {'label':'2005', 'value':'2005'},
-                {'label':'2006', 'value':'2006'},
-                {'label':'2007', 'value':'2007'},
-                {'label':'2008', 'value':'2008'},
-                {'label':'2009', 'value':'2009'},
-                {'label':'2010', 'value':'2010'}, 
-            ],
+            options=years,
             placeholder="Select a year",
             value='2001',
             style={'margin-bottom': '20px'}
@@ -77,7 +70,7 @@ layout = html.Div([
 
     html.Div([
         dcc.Graph(id="scst3")
-    ], style={'margin': '20px'}),
+    ], style={'display': 'flex', 'justify-content': 'center'}),
 ])
 
 @app.callback(
@@ -118,7 +111,6 @@ def update_figure(value, crimeValue, yearValue):
     fig.update_yaxes(title_text="Cases", secondary_y=False)
     fig.update_yaxes(title_text="Police Strength", secondary_y=True)
     fig.update_layout(autotypenumbers='convert types') 
-
 
     # Bubble Chart of Police Strength vs Crime Rate
     df2 = pd.merge(caipc, ps, on=['AREA_NAME', 'YEAR'])

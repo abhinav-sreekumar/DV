@@ -47,9 +47,11 @@ layout = html.Div([
     html.Div([
         html.H1('Team Members'),
         html.Div([cards], style={'width': '80%', 'margin': 'auto'})
-    ], style={"margin-top": "100px", "text-align": "center"}),
-    html.Div([
-        html.P("Go to graphs", style={"font-style": "italic", 'font-size': '20px'}),
-        html.I(className="bi bi-chevron-double-right", style={'font-size': '50px'}),
-    ], style={'display': 'flex', 'align-items': 'center', 'justify-content': 'center', 'margin-top': '55px', 'text-align': 'center'}),
+    ], style={"margin-top": "80px", "text-align": "center"}),
+    html.A(children=[
+        html.Div([
+            html.P("Go to source code", style={"font-style": "italic", 'font-size': '20px'}),
+            html.I(className="bi bi-chevron-double-right", style={'font-size': '50px'}),
+        ], style={'display': 'flex', 'align-items': 'center', 'justify-content': 'center', 'margin-top': '55px', 'text-align': 'center'}),
+    ], href="https://github.com/ASKOFFICIAL/DV", style={'color': 'white', 'text-decoration': 'none'}),
 ], style={"margin-top": "100px", "color": "white"})

@@ -22,6 +22,10 @@ crimeOptions=[]
 for i in Crimes_Against_IPC.columns[3:]:
     crimeOptions.append({'label': i, 'value': i})
 
+years = []
+for i in Crimes_Against_IPC.YEAR.unique():
+    years.append({'label': i, 'value': i})
+
 caipc = Crimes_Against_IPC
 caipc.sort_values(by=['AREA_NAME', 'YEAR'], inplace=True)
 caipc.reset_index(drop=True, inplace=True)
@@ -36,16 +40,15 @@ layout = html.Div([
             id='state',
             options=options,
             placeholder="Select a state",
-            style={'margin': '10px', 'width': '80%', 'text-align': 'center', 'color': "black"},
+            style={'margin-bottom': '20px'}
         ),
         
         dcc.Dropdown(
             id='crime',
             options=crimeOptions,
-            placeholder="Select a Crime",
-            style={'margin': '10px', 'width': '80%', 'text-align': 'center'}
+            placeholder="Select a Crime"
         ),
-    ], style={'margin': '20px', 'display': 'flex', 'justify-content': 'center'}),
+    ], style={'margin': '20px'}),
 
     html.Div([
         dcc.Graph(id="ipc1")
@@ -58,18 +61,7 @@ layout = html.Div([
     html.Div([
         dcc.Dropdown(
             id='year',
-            options=[
-                {'label':'2001', 'value':'2001'},
-                {'label':'2002', 'value':'2002'},
-                {'label':'2003', 'value':'2003'},
-                {'label':'2004', 'value':'2004'},
-                {'label':'2005', 'value':'2005'},
-                {'label':'2006', 'value':'2006'},
-                {'label':'2007', 'value':'2007'},
-                {'label':'2008', 'value':'2008'},
-                {'label':'2009', 'value':'2009'},
-                {'label':'2010', 'value':'2010'}, 
-            ],
+            options=years,
             placeholder="Select a year",
             value='2001',
             style={'margin-bottom': '20px'}
@@ -78,7 +70,7 @@ layout = html.Div([
 
     html.Div([
         dcc.Graph(id="ipc3")
-    ], style={'margin': '20px'}),
+    ], style={'display': 'flex', 'justify-content': 'center'}),
 ])
 
 @app.callback(
@@ -114,7 +106,7 @@ def update_figure(value, crimeValue, yearValue):
         secondary_y=False,
     )
 
-    fig.update_layout(title_text = "Number of " + crimeValue + " cases Against IPC vs Police Strength", paper_bgcolor="#EDEDF4")
+    fig.update_layout(title_text = "Number of " + crimeValue + " cases Against IPC vs Police Strength")
     fig.update_xaxes(title_text="Year", dtick=1)
     fig.update_yaxes(title_text="Cases", secondary_y=False)
     fig.update_yaxes(title_text="Police Strength", secondary_y=True)
@@ -164,13 +156,13 @@ def update_figure(value, crimeValue, yearValue):
         title='Different types of Crimes',   
         template='presentation',
         width=1000,
-        height=1000,                            
+        height=1000,        
     )  
     fig3.update_traces(textposition='inside', marker=dict(line=dict(color='#000000', width=2)),
                         pull=pulls, opacity=0.8,)
-    fig3.update_layout(title_text="Different types of Crimes in "+ value + " in year " + yearValue,
+    fig3.update_layout(title_text="Different types of Crimes in "+ value + " in year " + str(yearValue),
     uniformtext_minsize=14, 
     uniformtext_mode='hide',
-    legend = dict(font = dict(size = 10, color = "black")),)
+    legend = dict(font = dict(size = 10, color = "black")))
      
     return fig, fig2, fig3

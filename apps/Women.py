@@ -22,6 +22,10 @@ crimeOptions=[]
 for i in Crimes_Against_Women.columns[2:]:
     crimeOptions.append({'label': i, 'value': i})
 
+years = []
+for i in Crimes_Against_Women.YEAR.unique():
+    years.append({'label': i, 'value': i})
+
 caipc = Crimes_Against_Women
 caipc.sort_values(by=['AREA_NAME', 'YEAR'], inplace=True)
 caipc.reset_index(drop=True, inplace=True)
@@ -57,18 +61,7 @@ layout = html.Div([
     html.Div([
         dcc.Dropdown(
             id='year',
-            options=[
-                {'label':'2001', 'value':'2001'},
-                {'label':'2002', 'value':'2002'},
-                {'label':'2003', 'value':'2003'},
-                {'label':'2004', 'value':'2004'},
-                {'label':'2005', 'value':'2005'},
-                {'label':'2006', 'value':'2006'},
-                {'label':'2007', 'value':'2007'},
-                {'label':'2008', 'value':'2008'},
-                {'label':'2009', 'value':'2009'},
-                {'label':'2010', 'value':'2010'}, 
-            ],
+            options=years,
             placeholder="Select a year",
             value='2001',
             style={'margin-bottom': '20px'}
@@ -77,7 +70,7 @@ layout = html.Div([
 
     html.Div([
         dcc.Graph(id="women3")
-    ], style={'margin': '20px'}),
+    ], style={'display': 'flex', 'justify-content': 'center'}),
 ])
 
 @app.callback(
@@ -164,7 +157,7 @@ def update_figure(value, crimeValue, yearValue):
         title='Different types of Crimes',   
         template='presentation',
         width=1000,
-        height=1000,                            
+        height=850,                            
     )  
     fig3.update_traces(textposition='inside', marker=dict(line=dict(color='#000000', width=2)),
                         pull=pulls, opacity=0.8,)

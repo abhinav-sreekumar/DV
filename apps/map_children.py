@@ -4,14 +4,13 @@ from dash import html
 from dash import dcc
 from dash.dependencies import Input, Output
 import plotly.express as px
-import dash_bootstrap_components as dbc
 
 from app import app
 
-df = pd.read_csv("Map_CSVs/Crimes_Against_IPC_Test.csv")
+df = pd.read_csv("Map_CSVs/Crimes_Against_Children_Test.csv")
 json1 = json.load(open("states_india.geojson"))
 
-candidates = df.columns[3:33] 
+candidates = df.columns[3:-1]
 years = df.YEAR.unique()
 
 layout = html.Div([
@@ -30,11 +29,13 @@ layout = html.Div([
             placeholder = "Choose a year",
         ),
     ], style={'margin': '20px'}),
-    dcc.Graph(id="choropleth1"),
+    dcc.Graph(id="choropleth2"),
 ])
 
+
+
 @app.callback(
-    Output("choropleth1", "figure"), 
+    Output("choropleth2", "figure"), 
     [Input("crime", "value"), Input("year", "value")])
 def display_choropleth(crime, year):
     finaldata = df.loc[df["YEAR"] == year]
