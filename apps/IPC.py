@@ -36,15 +36,16 @@ layout = html.Div([
             id='state',
             options=options,
             placeholder="Select a state",
-            style={'margin-bottom': '20px'}
+            style={'margin': '10px', 'width': '80%', 'text-align': 'center', 'color': "black"},
         ),
         
         dcc.Dropdown(
             id='crime',
             options=crimeOptions,
-            placeholder="Select a Crime"
+            placeholder="Select a Crime",
+            style={'margin': '10px', 'width': '80%', 'text-align': 'center'}
         ),
-    ], style={'margin': '20px'}),
+    ], style={'margin': '20px', 'display': 'flex', 'justify-content': 'center'}),
 
     html.Div([
         dcc.Graph(id="ipc1")
@@ -113,7 +114,7 @@ def update_figure(value, crimeValue, yearValue):
         secondary_y=False,
     )
 
-    fig.update_layout(title_text = "Number of " + crimeValue + " cases Against IPC vs Police Strength")
+    fig.update_layout(title_text = "Number of " + crimeValue + " cases Against IPC vs Police Strength", paper_bgcolor="#EDEDF4")
     fig.update_xaxes(title_text="Year", dtick=1)
     fig.update_yaxes(title_text="Cases", secondary_y=False)
     fig.update_yaxes(title_text="Police Strength", secondary_y=True)
