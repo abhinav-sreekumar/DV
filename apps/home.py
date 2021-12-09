@@ -50,7 +50,7 @@ layout = html.Div([
     ], style={"margin-top": "80px", "text-align": "center"}),
     html.A(children=[
         html.Div([
-            html.P("Go to source code", style={"font-style": "italic", 'font-size': '20px'}),
+            html.P("Go to source code", style={"font-style": "italic", 'font-size': '20px', 'margin': '0'}),
             html.I(className="bi bi-chevron-double-right", style={'font-size': '50px'}),
         ], style={'display': 'flex', 'align-items': 'center', 'justify-content': 'center', 'margin-top': '55px', 'text-align': 'center'}),
     ], href="https://github.com/ASKOFFICIAL/DV", style={'color': 'white', 'text-decoration': 'none'}),
