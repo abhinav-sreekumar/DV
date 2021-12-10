@@ -4,7 +4,6 @@ from dash import html
 import dash_bootstrap_components as dbc
 from dash.dependencies import Input, Output
 import plotly.express as px
-import plotly.io as pio
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 

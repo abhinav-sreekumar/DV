@@ -1,10 +1,8 @@
 import pandas as pd
 from dash import dcc
 from dash import html
-import dash_bootstrap_components as dbc
 from dash.dependencies import Input, Output
 import plotly.express as px
-import plotly.io as pio
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 
@@ -164,5 +162,5 @@ def update_figure(value, crimeValue, yearValue):
     uniformtext_minsize=14, 
     uniformtext_mode='hide',
     legend = dict(font = dict(size = 10, color = "black")))
-     
+    
     return fig, fig2, fig3
